@@ -9,11 +9,11 @@ add_library(ki_rwu_c include/lib_ki_rwu_c.h src/search/node.c src/search/node.h 
 
 # Testing
 ## Node testing
-add_executable(ki_rwu_c_node_tests tests/search/node_test.c)
+add_executable(ki_rwu_c_node_tests test/search/node_test.c)
 target_link_libraries(ki_rwu_c_node_tests ki_rwu_c)
 add_test(NAME ki_rwu_c_node_tests COMMAND ki_rwu_c_node_tests)
 
 ## Uninformed search testing
-add_executable(ki_rwu_c_usearch_tests tests/search/uninformed/breadth_first_search_test.c)
+add_executable(ki_rwu_c_usearch_tests test/search/uninformed/breadth_first_search_test.c)
 target_link_libraries(ki_rwu_c_usearch_tests ki_rwu_c)
 add_test(NAME ki_rwu_c_usearch_tests COMMAND ki_rwu_c_usearch_tests)
