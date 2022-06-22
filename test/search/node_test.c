@@ -6,7 +6,7 @@ Node **dummy_successors(Node *node, int *k)
     return NULL;
 }
 
-int dummy_is_target_reached(Node *node)
+int dummy_is_target_reached(Node *node, Node *target)
 {
     return 0;
 }
@@ -24,7 +24,7 @@ void test_node_value()
     assert(actualNodeValue.innerValue == &k);
     assert(*((int *) actualNodeValue.innerValue) == k);
     assert(actualNodeValue.successors(NULL, NULL) == NULL);
-    assert(actualNodeValue.is_target_reached(NULL) == 0);
+    assert(actualNodeValue.is_target_reached(NULL, NULL) == 0);
 }
 
 void test_create_node_without_parent()

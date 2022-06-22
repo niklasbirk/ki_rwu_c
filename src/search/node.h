@@ -18,7 +18,7 @@ typedef struct NodeValue {
 
     /// Check if target node is reached.
     /// Returns 1 if target is reached, else 0
-    int (*is_target_reached)(struct Node *);
+    int (*is_target_reached)(struct Node *, struct Node *);
 } NodeValue;
 
 typedef struct Node {

@@ -7,7 +7,7 @@ Node *breadth_first_search(Node **nodes, int n, Node *target)
 
     for (int i = 0; i < n; i++)
     {
-        if (nodes[i]->value->is_target_reached(target))
+        if (nodes[i]->value->is_target_reached(nodes[i], target))
         {
             return nodes[i];
         }

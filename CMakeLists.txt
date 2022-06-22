@@ -13,6 +13,11 @@ add_executable(ki_rwu_c_node_tests test/search/node_test.c)
 target_link_libraries(ki_rwu_c_node_tests ki_rwu_c)
 add_test(NAME ki_rwu_c_node_tests COMMAND ki_rwu_c_node_tests)
 
+## Eightpuzzle node testing
+add_executable(ki_rwu_c_eightpuzzle_tests test/search/eightpuzzle/example_eightpuzzle.c test/search/eightpuzzle/eightpuzzle_test.c test/search/eightpuzzle/example_eightpuzzle.h)
+target_link_libraries(ki_rwu_c_eightpuzzle_tests ki_rwu_c)
+add_test(NAME ki_rwu_c_eightpuzzle_tests COMMAND ki_rwu_c_eightpuzzle_tests)
+
 ## Uninformed search testing
 add_executable(ki_rwu_c_usearch_tests test/search/uninformed/breadth_first_search_test.c)
 target_link_libraries(ki_rwu_c_usearch_tests ki_rwu_c)
