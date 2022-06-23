@@ -25,8 +25,29 @@ Node *breadth_first_search(Node **nodes, int n, Node *target)
     return NULL;
 }
 
-Node *depth_first_search(Node *nodes, int n, Node *target)
+Node *depth_first_search(Node *node, Node *target)
 {
+    if (node->value->is_target_reached(node, target))
+    {
+        return node;
+    }
+
+    int successorsListSize;
+    Node **successors = node->value->successors(node, &successorsListSize);
+
+
+    while (successorsListSize > 0)
+    {
+        Node *solutionNode = depth_first_search(*successors, target);
+
+        if (solutionNode != NULL)
+        {
+            return solutionNode;
+        }
+
+        remove_first_node_from_list(successors, &successorsListSize);
+    }
+
     return NULL;
 }
 
