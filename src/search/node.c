@@ -58,3 +58,20 @@ Node **append_nodes_to_list(Node **list, int *listSize, Node **newNodes, int new
 
     return newList;
 }
+
+Node **remove_first_node_from_list(Node **list, int *listSize)
+{
+    Node **newList = malloc((*listSize - 1) * sizeof(Node));
+
+    for (int i = 0; i < *listSize - 1; i++)
+    {
+        newList[i] = list[i+1];
+    }
+
+    *listSize--;
+
+    free_node(list[0]);
+    free(list);
+
+    return newList;
+}

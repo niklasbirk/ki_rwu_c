@@ -1,9 +1,6 @@
 #ifndef KI_RWU_C_NODE_H
 #define KI_RWU_C_NODE_H
 
-#include <stdlib.h>
-#include <memory.h>
-
 struct Node;
 
 typedef struct NodeValue {
@@ -40,5 +37,6 @@ void free_nodes(Node **nodes, int n);
 void free_heuristic_node(HeuristicNode *node);
 
 Node **append_nodes_to_list(Node **list, int *listSize, Node **newNodes, int newNodesSize);
+Node **remove_first_node_from_list(Node **list, int *listSize);
 
 #endif //KI_RWU_C_NODE_H
