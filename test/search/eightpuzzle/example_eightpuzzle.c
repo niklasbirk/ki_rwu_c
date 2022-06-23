@@ -8,51 +8,24 @@ Node **eightpuzzle_successors(Node *node, int *amount)
 
     detect_empty_position(node->value->innerValue, &y, &x);
 
-    for (int i = 0; i < 4; i++)
+    for (int dir = TOP; dir <= LEFT; dir++)
     {
-        int tmpNewState[3][3];
-        copy_of_state(node->value->innerValue, tmpNewState);
+        Dyn2DIntArray *newState = create_dyn_2d_int_array();
+
+        copy_of_state(node->value->innerValue, newState);
 
         int k, l;
-
-        switch(i)
-        {
-            case 0:
-                k = y - 1;
-                l = x;
-                break;
-            case 1:
-                k = y;
-                l = x + 1;
-                break;
-            case 2:
-                k = y + 1;
-                l = x;
-                break;
-            case 3:
-                k = y;
-                l = x - 1;
-                break;
-            default:
-                break;
-        }
+        calculate_indizes_from_direction(dir, x, y, &k, &l);
 
         if (k >= 0 && k <= 2 && l >= 0 && l <= 2)
         {
-            swap_state_field(tmpNewState, y, x, k, l);
-
-            int **newState = malloc(sizeof(int *) * 3);
-
-            for (int j = 0; j < 3; ++j)
-            {
-                newState[j] = malloc(sizeof(int) * 3);
-            }
+            swap_state_field(newState, y, x, k, l);
 
             for (int j = 0; j < 3; ++j)
             {
                 for (int o = 0; o < 3; ++o)
                 {
-                    newState[j][o] = tmpNewState[j][o];
+                    newState->values[j][o] = newState->values[j][o];
                 }
             }
 
@@ -64,10 +37,10 @@ Node **eightpuzzle_successors(Node *node, int *amount)
             Node *successor = create_node(node, newStateNodeValue);
             Node **newSuccessor = &successor;
 
-            if (!equal_state_values(tmpNewState, node->value->innerValue)
-                && (node->parent == NULL || !equal_state_values(tmpNewState, node->parent->value->innerValue)))
+            if (!equal_state_values(newState, node->value->innerValue)
+                && (node->parent == NULL || !equal_state_values(newState, node->parent->value->innerValue)))
             {
-                successors = append_nodes_to_list(successors, successorsListSize++, newSuccessor, 1);
+                successors = append_nodes_to_list(successors, &successorsListSize, newSuccessor, 1);
             }
         }
     }
@@ -81,25 +54,50 @@ int eightpuzzle_is_target_reached(Node *node, Node *target)
     return equal_state_values(node->value->innerValue, target->value->innerValue);
 }
 
-void copy_of_state(int src[3][3], int dest[3][3])
+void calculate_indizes_from_direction(Direction i, int x, int y, int *k, int *l)
 {
-    memcpy(dest, src, sizeof(int) * 3 * 3);
+    switch(i)
+    {
+        case TOP:
+            *k = y - 1;
+            *l = x;
+            break;
+        case RIGHT:
+            *k = y;
+            *l = x + 1;
+            break;
+        case DOWN:
+            *k = y + 1;
+            *l = x;
+            break;
+        case LEFT:
+            *k = y;
+            *l = x - 1;
+            break;
+        default:
+            break;
+    }
 }
 
-void swap_state_field(int state[3][3], int i, int j, int k, int l)
+void copy_of_state(Dyn2DIntArray *src, Dyn2DIntArray *dest)
 {
-    int tmp = state[k][l];
-    state[k][l] = state[i][j];
-    state[i][j] = tmp;
+    memcpy(dest->values, src->values, sizeof(int) * 3 * 3);
 }
 
-void detect_empty_position(int state[3][3], int *i, int *j)
+void swap_state_field(Dyn2DIntArray *state, int i, int j, int k, int l)
+{
+    int tmp = state->values[k][l];
+    state->values[k][l] = state->values[i][j];
+    state->values[i][j] = tmp;
+}
+
+void detect_empty_position(Dyn2DIntArray *state, int *i, int *j)
 {
     for (int row = 0; row < 3; row++)
     {
         for (int col = 0; col < 3; col++)
         {
-            if (state[row][col] == 0)
+            if (state->values[row][col] == 0)
             {
                 *i = row;
                 *j = col;
@@ -110,9 +108,9 @@ void detect_empty_position(int state[3][3], int *i, int *j)
     }
 }
 
-int equal_state_values(int state[3][3], int target[3][3])
+int equal_state_values(Dyn2DIntArray *state, Dyn2DIntArray *target)
 {
-    if (state == NULL)
+    if (state == NULL || target == NULL)
     {
         return 0;
     }
@@ -121,7 +119,7 @@ int equal_state_values(int state[3][3], int target[3][3])
     {
         for (int col = 0; col < 3; col++)
         {
-            if (state[row][col] != target[row][col])
+            if (state->values[row][col] != target->values[row][col])
             {
                 return 0;
             }
