@@ -3,13 +3,13 @@
 #include "../eightpuzzle/util.h"
 #include "../../../src/search/uninformed/uninformed_search.h"
 
-void test_should_return_correct_node_bfs_TMP()
+void test_should_return_correct_node_dfs_TMP()
 {
     Dyn2DIntArray state = {
             {
                     {1, 2, 3},
-                    {4, 5, 0},
-                    {7, 8, 6}
+                    {4, 5, 6},
+                    {7, 8, 0}
             }
     };
     NodeValue stateValue = {
@@ -33,7 +33,7 @@ void test_should_return_correct_node_bfs_TMP()
     };
     Node *targetNode = create_node(NULL, &targetValue);
 
-    Node *actual = breadth_first_search(&node, 1, targetNode);
+    Node *actual = depth_first_search(node, targetNode);
 
     print_eightpuzzle_solution(actual);
 
@@ -44,7 +44,7 @@ void test_should_return_correct_node_bfs_TMP()
 /****************************
  ********** FAILS ***********
  ****************************/
-void test_should_return_correct_bfs_node()
+void test_should_return_correct_dfs_node()
 {
     Dyn2DIntArray state = {
             {
@@ -74,7 +74,7 @@ void test_should_return_correct_bfs_node()
     };
     Node *targetNode = create_node(NULL, &targetValue);
 
-    Node *actual = breadth_first_search(&node, 1, targetNode);
+    Node *actual = depth_first_search(node, targetNode);
 
     print_eightpuzzle_solution(actual);
 
@@ -82,7 +82,7 @@ void test_should_return_correct_bfs_node()
     free_node(targetNode);
 }
 
-void test_should_return_correct_cubek_bfs_node()
+void test_should_return_correct_cubek_dfs_node()
 {
     Dyn2DIntArray state = {
             {
@@ -112,7 +112,7 @@ void test_should_return_correct_cubek_bfs_node()
     };
     Node *targetNode = create_node(NULL, &targetValue);
 
-    Node *actual = breadth_first_search(&node, 1, targetNode);
+    Node *actual = depth_first_search(node, targetNode);
 
     print_eightpuzzle_solution(actual);
 
@@ -122,15 +122,15 @@ void test_should_return_correct_cubek_bfs_node()
 
 int main(void)
 {
-    test_should_return_correct_node_bfs_TMP();
+    test_should_return_correct_node_dfs_TMP();
 
     // Fails because of SegFault.
     //
     // But why?
     // Too many nodes in list?
     // Memory Problems because of bad memory allocations and freeing?
-//    test_should_return_correct_bfs_node();
-//    test_should_return_correct_cubek_bfs_node();
+    test_should_return_correct_dfs_node();
+//    test_should_return_correct_cubek_dfs_node();
 
     return 0;
 }

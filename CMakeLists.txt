@@ -30,7 +30,8 @@ target_link_libraries(ki_rwu_c_eightpuzzle_tests ki_rwu_c)
 add_test(NAME ki_rwu_c_eightpuzzle_tests COMMAND ki_rwu_c_eightpuzzle_tests)
 
 ## Uninformed search testing
-add_executable(ki_rwu_c_usearch_tests
+### Breadth-first search testing
+add_executable(ki_rwu_c_usearch_bfs_tests
         test/search/uninformed/breadth_first_search_test.c
         test/search/eightpuzzle/util.c
         test/search/eightpuzzle/util.h
@@ -38,5 +39,17 @@ add_executable(ki_rwu_c_usearch_tests
         test/search/eightpuzzle/example_eightpuzzle.c
         test/search/eightpuzzle/dyn_2d_int_array.h
         test/search/eightpuzzle/dyn_2d_int_array.c)
-target_link_libraries(ki_rwu_c_usearch_tests ki_rwu_c)
-add_test(NAME ki_rwu_c_usearch_tests COMMAND ki_rwu_c_usearch_tests)
+target_link_libraries(ki_rwu_c_usearch_bfs_tests ki_rwu_c)
+add_test(NAME ki_rwu_c_usearch_bfs_tests COMMAND ki_rwu_c_usearch_bfs_tests)
+
+### Depth-first search testing
+add_executable(ki_rwu_c_usearch_dfs_tests
+        test/search/uninformed/depth_first_search_test.c
+        test/search/eightpuzzle/util.c
+        test/search/eightpuzzle/util.h
+        test/search/eightpuzzle/example_eightpuzzle.h
+        test/search/eightpuzzle/example_eightpuzzle.c
+        test/search/eightpuzzle/dyn_2d_int_array.h
+        test/search/eightpuzzle/dyn_2d_int_array.c)
+target_link_libraries(ki_rwu_c_usearch_dfs_tests ki_rwu_c)
+add_test(NAME ki_rwu_c_usearch_dfs_tests COMMAND ki_rwu_c_usearch_dfs_tests)
