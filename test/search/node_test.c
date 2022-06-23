@@ -85,8 +85,10 @@ void test_append_one_node_to_list()
     Node *node3 = create_node(node2, &nodeValue);
     Node **toAppend = &node3;
 
-    list = append_nodes_to_list(list, 2, toAppend, 1);
+    int listSize = 2;
+    list = append_nodes_to_list(list, &listSize, toAppend, 1);
 
+    assert(listSize == 3);
     assert(list[0]->parent == node1->parent);
     assert(list[1]->parent == node2->parent);
     assert(list[2]->parent == node3->parent);
@@ -119,8 +121,10 @@ void test_append_three_node_to_list()
     toAppend[1] = node4;
     toAppend[2] = node5;
 
-    list = append_nodes_to_list(list, 2, toAppend, 3);
+    int listSize = 2;
+    list = append_nodes_to_list(list, &listSize, toAppend, 3);
 
+    assert(listSize == 5);
     assert(list[0]->parent == node1->parent);
     assert(list[1]->parent == node2->parent);
     assert(list[2]->parent == node3->parent);

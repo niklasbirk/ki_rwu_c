@@ -14,8 +14,7 @@ Node *breadth_first_search(Node **nodes, int n, Node *target)
 
         int successorsListSize;
         Node **successors = nodes[i]->value->successors(nodes[i], &successorsListSize);
-        newNodes = append_nodes_to_list(newNodes, newNodesSize, successors, successorsListSize);
-        newNodesSize += successorsListSize;
+        newNodes = append_nodes_to_list(newNodes, &newNodesSize, successors, successorsListSize);
     }
 
     if (newNodesSize > 0)

@@ -45,16 +45,16 @@ void free_heuristic_node(HeuristicNode *node)
     free(node);
 }
 
-Node **append_nodes_to_list(Node **list, int listSize, Node **newNodes, int newNodesSize)
+Node **append_nodes_to_list(Node **list, int *listSize, Node **newNodes, int newNodesSize)
 {
-    int newListSize = listSize + newNodesSize;
-
-    Node **newList = realloc(list, newListSize * sizeof(Node));
+    Node **newList = realloc(list, (*listSize + newNodesSize) * sizeof(Node));
 
     for (int i = 0; i < newNodesSize; i++)
     {
-        newList[i + listSize] = newNodes[i];
+        newList[i + *listSize] = newNodes[i];
     }
+
+    *listSize += newNodesSize;
 
     return newList;
 }

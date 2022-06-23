@@ -39,6 +39,6 @@ void free_node(Node *node);
 void free_nodes(Node **nodes, int n);
 void free_heuristic_node(HeuristicNode *node);
 
-Node **append_nodes_to_list(Node **list, int listSize, Node **newNodes, int newNodesSize);
+Node **append_nodes_to_list(Node **list, int *listSize, Node **newNodes, int newNodesSize);
 
 #endif //KI_RWU_C_NODE_H
