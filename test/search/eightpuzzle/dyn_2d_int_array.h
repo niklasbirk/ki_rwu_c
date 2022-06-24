@@ -1,7 +1,7 @@
+#include <stdlib.h>
+
 #ifndef KI_RWU_C_DYN_2D_INT_ARRAY_H
 #define KI_RWU_C_DYN_2D_INT_ARRAY_H
-
-#include <stdlib.h>
 
 typedef struct Dyn2DIntArray {
     int values[3][3];

@@ -1,8 +1,8 @@
-#ifndef KI_RWU_C_EXAMPLE_EIGHTPUZZLE_H
-#define KI_RWU_C_EXAMPLE_EIGHTPUZZLE_H
-
 #include "../../../include/lib_ki_rwu_c.h"
 #include "dyn_2d_int_array.h"
+
+#ifndef KI_RWU_C_EXAMPLE_EIGHTPUZZLE_H
+#define KI_RWU_C_EXAMPLE_EIGHTPUZZLE_H
 
 typedef enum Direction {
     TOP,

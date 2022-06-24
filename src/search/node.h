@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <memory.h>
+
 #ifndef KI_RWU_C_NODE_H
 #define KI_RWU_C_NODE_H
 
